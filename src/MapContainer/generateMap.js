@@ -16,14 +16,14 @@ export const generateMap = ({
   const canvasContainer = containerRef.current;
   const canvas = canvasRef.current;
   const tooltip = tooltipRef.current;
-  const width = canvasContainer.offsetWidth;
-  const height = canvasContainer.offsetHeight;
   const context = canvas.getContext("2d");
   const selection = d3.select(canvas);
+  let width = canvasContainer.offsetWidth;
+  let height = canvasContainer.offsetHeight;
   canvas.width = width;
   canvas.height = height;
 
-  const originalScale = Math.min(width / 3, height / 3);
+  const originalScale = Math.min(width, height) / 3;
   const translation = [width / 2, height / 2];
   const worldVel = [0.1, -0.05, 0];
   const satVel = worldVel[0] * 1.8;
@@ -138,6 +138,7 @@ export const generateMap = ({
       .on("start", (e) => {
         rotate0 = worldProjection.rotate();
         coords0 = coords(e);
+        tooltip.style.top = "-999px";
       })
       .on("drag", (e) => {
         const coords1 = coords(e);
@@ -168,8 +169,25 @@ export const generateMap = ({
       }
     };
 
-    selection.on("mousemove", hover);
+    const rescale = () => {
+      const w = canvasContainer.offsetWidth;
+      const h = canvasContainer.offsetHeight;
+      width = w;
+      height = h;
+      canvas.width = w;
+      canvas.height = h;
 
+      worldProjection.scale(Math.min(w, h) / 3).translate([w / 2, h / 2]);
+      satProjection
+        .scale((Math.min(w, h) / 3) * satHeight)
+        .translate([w / 2, h / 2]);
+
+      context.restore();
+    };
+
+    window.addEventListener("resize", rescale);
+
+    selection.on("mousemove", hover);
     selection.call(drag).call(zoom);
   }; // load()
 
