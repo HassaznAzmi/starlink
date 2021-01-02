@@ -23,7 +23,7 @@ export const generateMap = ({
   canvas.width = width;
   canvas.height = height;
 
-  const originalScale = height / 3;
+  const originalScale = Math.min(width / 3, height / 3);
   const translation = [width / 2, height / 2];
   const worldVel = [0.1, -0.05, 0];
   const satVel = worldVel[0] * 1.8;
