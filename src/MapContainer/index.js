@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import * as fetch from "node-fetch";
-import { generateMap } from "./generateMap";
-import spacexLogo from "./utils/spacex.png";
-import starlinkLogo from "./utils/starlink.png";
-import "./index.css";
+import React, { useEffect, useRef, useState } from 'react';
+import * as fetch from 'node-fetch';
+import { generateMap } from './generateMap';
+import spacexLogo from './utils/spacex.png';
+import starlinkLogo from './utils/starlink.png';
+import './index.css';
 
 const MapContainer = () => {
   const containerRef = useRef(null);
@@ -28,7 +28,7 @@ const MapContainer = () => {
   };
 
   useEffect(() => {
-    fetch("https://api.spacexdata.com/v4/starlink")
+    fetch('https://api.spacexdata.com/v4/starlink')
       .then((res) => res.json())
       .then((satellites) =>
         generateMap({
@@ -45,9 +45,7 @@ const MapContainer = () => {
   return (
     <div className="container">
       <div className="navbar">
-        <div alt="placeholder" width={75}>
-          &nbsp
-        </div>
+        <div alt="placeholder" className="placeholder" />
         <img src={starlinkLogo} width={150} alt="Logo" />
         <img src={spacexLogo} width={75} alt="Logo" />
       </div>
@@ -58,7 +56,7 @@ const MapContainer = () => {
         {tooltip}
       </div>
       <div className="disclaimer">
-        Not Associated with SpaceX. All data retrieved from{" "}
+        Not Associated with SpaceX. All data retrieved from{' '}
         <a href="https://github.com/r-spacex/SpaceX-API">here</a>, updated every
         hour
       </div>
