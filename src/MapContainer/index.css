@@ -56,7 +56,8 @@
 .disclaimer {
   position: fixed;
   bottom: 2px;
-  left: 2px;
+  left: 50%;
+  transform: translateX(-50%);
   color: white;
   font-size: 10px;
 }

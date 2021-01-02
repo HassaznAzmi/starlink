@@ -121,12 +121,11 @@ export const generateMap = ({
 
     const zoom = d3
       .zoom()
+      .touchable(true)
       .scaleExtent([0.5, 4])
       .on("zoom", (e) => {
-        scale = originalScale * e.transform.k;
         worldProjection.scale(originalScale * e.transform.k);
         satProjection.scale(originalScale * satHeight * e.transform.k);
-        context.restore();
       });
 
     let rotate0;
@@ -187,7 +186,28 @@ export const generateMap = ({
 
     window.addEventListener("resize", rescale);
 
+    let initTouches;
     selection.on("mousemove", hover);
+    selection
+      .on("touchstart", (e) => {
+        initTouches = e.touches;
+      })
+      .on("touchmove", (e) => {
+        if (e.touches.length > 1) {
+          const initDist = Math.hypot(
+            initTouches[0].pageX - initTouches[1].pageX,
+            initTouches[0].pageY - initTouches[1].pageY
+          );
+          const currDist = Math.hypot(
+            e.touches[0].pageX - e.touches[1].pageX,
+            e.touches[0].pageY - e.touches[1].pageY
+          );
+          const pinchFactor = currDist / initDist;
+          scale = scale * pinchFactor;
+          worldProjection.scale(originalScale * pinchFactor);
+          satProjection.scale(originalScale * satHeight * pinchFactor);
+        }
+      });
     selection.call(drag).call(zoom);
   }; // load()
 
