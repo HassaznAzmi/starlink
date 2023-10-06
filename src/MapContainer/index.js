@@ -12,19 +12,21 @@ const MapContainer = () => {
   const [tooltip, setTooltip] = useState(<></>);
 
   const handleTooltip = (satellite) => {
-    setTooltip(
-      <>
-        <div className="header">{satellite?.spaceTrack?.OBJECT_NAME}</div>
-        <ul className="tooltipBody">
-          <li>Longitude: {satellite?.longitude.toFixed(4)}</li>
-          <li>Latitude: {satellite?.latitude.toFixed(4)}</li>
-          <li>Velocity (km/s): {satellite?.velocity_kms.toFixed(4)}</li>
-          <li>Height (km): {satellite?.height_km.toFixed(4)}</li>
-          <br />
-          <span>Launch Date: {satellite?.spaceTrack?.LAUNCH_DATE}</span>
-        </ul>
-      </>
-    );
+    if(satellite) {
+      setTooltip(
+        <>
+          <div className="header">{satellite?.spaceTrack?.OBJECT_NAME}</div>
+          <ul className="tooltipBody">
+            <li>Longitude: {satellite?.longitude?.toFixed(4)}</li>
+            <li>Latitude: {satellite?.latitude?.toFixed(4)}</li>
+            {satellite?.velocity_kms && <li>Velocity (km/s): {satellite?.velocity_kms?.toFixed(4)}</li>}
+            <li>Height (km): {satellite?.height_km.toFixed(4)}</li>
+            <br />
+            <span>Launch Date: {satellite?.spaceTrack?.LAUNCH_DATE}</span>
+          </ul>
+        </>
+      );
+    }
   };
 
   useEffect(() => {

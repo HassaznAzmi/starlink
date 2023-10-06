@@ -108,13 +108,11 @@ export const generateMap = ({
 
       context.beginPath();
       satPath(points);
-      context.fillStyle = "salmon";
+      context.fillStyle = "#0096FF";
       context.fill();
 
       context.restore();
-
-      spin();
-    }; // drawWorld()
+    };
 
     // First draw
     requestAnimationFrame(drawWorld);
@@ -151,7 +149,7 @@ export const generateMap = ({
       });
 
     const hover = (e) => {
-      const [longitude, latitude] = satProjection.invert([e.layerX, e.layerY]);
+      const [longitude, latitude] = satProjection.invert([e.offsetX, e.offsetY]);
       const satellite = starlink.find((sat) => {
         return (
           Math.abs(sat.longitude - longitude) < 1 &&
