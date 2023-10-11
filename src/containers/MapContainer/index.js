@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import * as fetch from "node-fetch";
+
+import { getStarlink } from "apis";
+
 import { generateMap } from "./generateMap";
 import "./index.css";
 
@@ -31,24 +33,11 @@ const MapContainer = () => {
   };
 
   useEffect(() => {
-    const result = fetch("https://api.spacexdata.com/v4/starlink")
-      .then((res) => res.json())
+    getStarlink()
       .then((satellites) => {
         setSats(satellites);
-        // const sim = generateMap({
-        //   containerRef,
-        //   canvasRef,
-        //   satellites,
-        //   tooltipRef,
-        //   handleTooltip,
-        // });
-        // return sim;
       })
       .catch((err) => console.log(err));
-
-    // result.then((resp) => {
-    //   console.log(resp);
-    // });
   }, []);
 
   useEffect(() => {
@@ -61,13 +50,12 @@ const MapContainer = () => {
         tooltipRef,
         handleTooltip,
       });
-      console.log(sim);
     }
     return sim?.stop;
   }, [sats]);
 
   return (
-    <div className="container">
+    <div className="mapContainer">
       <div ref={containerRef} className="canvasContainer">
         <canvas ref={canvasRef} className="canvas" />
       </div>

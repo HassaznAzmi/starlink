@@ -89,7 +89,6 @@ export const generateMap = ({
 
     // Draw the world
     const drawWorld = () => {
-      console.log("draw");
       requestAnimationFrame(drawWorld);
       context.clearRect(0, 0, width, height);
       drawStars();
@@ -127,7 +126,7 @@ export const generateMap = ({
     const zoom = d3
       .zoom()
       .touchable(true)
-      .scaleExtent([0.5, 8])
+      .scaleExtent([1.3, 8])
       .on("zoom", (e) => {
         worldProjection.scale(originalScale * e.transform.k);
         satProjection.scale(originalScale * satHeight * e.transform.k);
@@ -166,7 +165,7 @@ export const generateMap = ({
           Math.abs(sat.latitude - latitude) < 1
         );
       });
-      if (satellite) {
+      if (satellite && e.offsetY > 40) {
         const tooltipHeight = tooltip.offsetHeight;
         handleTooltip(satellite);
         tooltip.style.top = `${e.y - 16 - tooltipHeight}px`;

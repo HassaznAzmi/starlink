@@ -1,0 +1,17 @@
+.dashboardContainer {
+  max-width: 1600px;
+  display: flex;
+  align-self: center;
+  align-items: baseline;
+}
+
+.viewStarlinkButton {
+  border-radius: 8px;
+  width: 100%;
+  padding: 8px;
+  font-size: large;
+  background: black;
+  color: white;
+  font-weight: bolder;
+  cursor: pointer;
+}

@@ -1,15 +1,22 @@
-html, body, div#root {
+html,
+body,
+div#root {
   height: 100%;
   width: 100%;
-  background-color: black;
+  background: black;
+  background-image: url("https://static.vecteezy.com/system/resources/previews/002/008/069/large_2x/3d-starry-night-sky-background-free-photo.jpg");
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 
   margin: 0;
-  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
