@@ -1,0 +1,8 @@
+.rocketsContainer {
+  display: flex;
+  align-self: center;
+}
+
+.rocketImg {
+  object-fit: none;
+}

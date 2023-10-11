@@ -3,6 +3,7 @@
   margin: 16px;
   background-color: rgba(146, 146, 146, 0.5);
   border-radius: 8px;
+  flex: 1;
 }
 
 .cardContainer:hover {

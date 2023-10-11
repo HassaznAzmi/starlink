@@ -1,31 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useAnimate, stagger } from "framer-motion";
 
 import Card from "components/Card";
 import Countdown from "components/Countdown";
 import { getLatestLaunch, getNextLaunch, getStarlink } from "apis";
+import useCardAnimation from "hooks/useCardAnimation";
 
 import "./index.css";
-const useCardAnimation = () => {
-  const [scope, animate] = useAnimate();
-
-  useEffect(() => {
-    animate(
-      ".cardContainer",
-      { opacity: [0, 1], x: [100, 0] },
-      {
-        duration: 0.3,
-        delay: stagger(0.1, { startDelay: 0.15 }),
-      }
-    );
-  }, []);
-
-  return scope;
-};
 
 const Dashboard = () => {
-  const [loading, setLoading] = useState(true);
   const [latestLaunch, setLatestLaunch] = useState();
   const [nextLaunch, setNextLaunch] = useState();
   const [starlink, setStarlink] = useState();
@@ -38,7 +21,6 @@ const Dashboard = () => {
         setLatestLaunch(latest);
         setNextLaunch(next);
         setStarlink(sats);
-        setLoading(false);
       }
     );
   }, []);
@@ -73,13 +55,13 @@ const Dashboard = () => {
           src={`https://www.youtube.com/embed/${nextLaunch?.links?.youtube_id}`}
           title="YouTube video player"
           allow="accelerometer; 
-  autoplay; 
-  clipboard-write; 
-  encrypted-media; 
-  gyroscope; 
-  picture-in-picture; 
-  web-share"
-          allowfullscreen
+                  autoplay; 
+                  clipboard-write; 
+                  encrypted-media; 
+                  gyroscope; 
+                  picture-in-picture; 
+                  web-share"
+          allowFullScreen
         ></iframe>
       </Card>
 

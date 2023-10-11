@@ -27,3 +27,12 @@ export const getHistory = () => {
     res.json()
   );
 };
+export const getCrew = () => {
+  return fetch("https://api.spacexdata.com/v4/crew").then((res) => res.json());
+};
+
+export const getRockets = () => {
+  return fetch("https://api.spacexdata.com/v4/rockets").then((res) =>
+    res.json()
+  );
+};
