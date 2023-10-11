@@ -32,8 +32,8 @@
   top: -999px;
   padding: 8px;
   min-width: 250px;
-  background-color: #4a4a4a;
   color: white;
+  border-radius: 8px;
 }
 
 .header {
@@ -44,13 +44,15 @@
   padding: 2px;
   font-size: 18px;
   font-weight: bolder;
+  border-radius: 8px 8px 0px 0px;
 }
 
 .tooltipBody {
-  background-color: #696969;
+  background-color: rgba(0, 0, 0, 0.8);
   list-style-type: none;
   padding: 8px;
   margin: 0;
+  border-radius: 0px 0px 8px 8px;
 }
 
 .disclaimer {

@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 import * as topojson from "topojson";
 import world from "./utils/world.json";
+import topology from "./utils/topology.json";
 
 export const generateMap = ({
   containerRef,
@@ -9,8 +10,6 @@ export const generateMap = ({
   tooltipRef,
   handleTooltip,
 }) => {
-  console.log(satellites);
-
   /* Set up */
   /* ====== */
   const canvasContainer = containerRef.current;
@@ -25,14 +24,30 @@ export const generateMap = ({
 
   const originalScale = Math.min(width, height) / 3;
   const translation = [width / 2, height / 2];
-  const worldVel = [0.1, -0.05, 0];
-  const satVel = worldVel[0] * 1.8;
   const satHeight = 1.1;
   let scale = originalScale;
 
-  const sphere = { type: "Sphere" };
+  const starsAmount = 500;
+  const stars = [];
+  for (var i = 0; i < starsAmount; i++) {
+    const x = Math.random() * width;
+    const y = Math.random() * height;
+    const radius = Math.random() * 3;
+    stars.push({ x, y, radius });
+  }
 
-  const graticule = d3.geoGraticule();
+  const drawStars = () => {
+    if (stars.length > 0) {
+      stars.forEach((star) => {
+        context.beginPath();
+        context.arc(star.x, star.y, star.radius, 0, 360);
+        context.fillStyle = "white";
+        context.fill();
+      });
+    }
+  };
+
+  const sphere = { type: "Sphere" };
 
   // set up the main canvas and the projection
   const worldProjection = d3
@@ -59,7 +74,7 @@ export const generateMap = ({
     }
 
     const land = topojson.feature(world, world.objects.countries);
-    const grid = graticule();
+    const ocean = topojson.feature(topology, topology.objects.ocean);
 
     const outerArray = [];
     starlink.forEach((satellite) => {
@@ -72,31 +87,18 @@ export const generateMap = ({
       coordinates: outerArray,
     };
 
-    const spin = () => {
-      //Update sat locations
-      // for (let i = 0; i < points.coordinates.length; i++) {
-      //   points.coordinates[i][1] += satVel;
-      // }
-      //Auto rotate system
-      // worldProjection.rotate();
-    }; // spin()
-
     // Draw the world
     const drawWorld = () => {
+      console.log("draw");
       requestAnimationFrame(drawWorld);
       context.clearRect(0, 0, width, height);
+      drawStars();
       context.save();
 
       context.beginPath();
       worldPath(sphere);
       context.lineWidth = 1;
       context.strokeStyle = "#ccc";
-      context.stroke();
-
-      context.beginPath();
-      worldPath(grid);
-      context.lineWidth = 0.5;
-      context.strokeStyle = "#ddd";
       context.stroke();
 
       context.beginPath();
@@ -107,8 +109,13 @@ export const generateMap = ({
       context.stroke();
 
       context.beginPath();
+      worldPath(ocean);
+      context.fillStyle = "black";
+      context.fill();
+
+      context.beginPath();
       satPath(points);
-      context.fillStyle = "#0096FF";
+      context.fillStyle = "#3399FF";
       context.fill();
 
       context.restore();
@@ -120,7 +127,7 @@ export const generateMap = ({
     const zoom = d3
       .zoom()
       .touchable(true)
-      .scaleExtent([0.5, 4])
+      .scaleExtent([0.5, 8])
       .on("zoom", (e) => {
         worldProjection.scale(originalScale * e.transform.k);
         satProjection.scale(originalScale * satHeight * e.transform.k);
@@ -149,7 +156,10 @@ export const generateMap = ({
       });
 
     const hover = (e) => {
-      const [longitude, latitude] = satProjection.invert([e.offsetX, e.offsetY]);
+      const [longitude, latitude] = satProjection.invert([
+        e.offsetX,
+        e.offsetY,
+      ]);
       const satellite = starlink.find((sat) => {
         return (
           Math.abs(sat.longitude - longitude) < 1 &&
@@ -210,4 +220,13 @@ export const generateMap = ({
   }; // load()
 
   load(null, satellites, world);
+
+  return {
+    stop: () => {
+      let id = window.requestAnimationFrame(function () {});
+      while (id--) {
+        window.cancelAnimationFrame(id);
+      }
+    },
+  };
 };

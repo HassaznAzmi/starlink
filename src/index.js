@@ -1,11 +1,14 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import MapContainer from "./MapContainer";
+import { createRoot } from "react-dom/client";
 
-ReactDOM.render(
+import App from "containers/App";
+
+import "./index.css";
+
+const root = createRoot(document.getElementById("root"));
+
+root.render(
   <React.StrictMode>
-    <MapContainer />
-  </React.StrictMode>,
-  document.getElementById("root")
+    <App />
+  </React.StrictMode>
 );
