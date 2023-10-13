@@ -3,8 +3,10 @@ body,
 div#root {
   height: 100%;
   width: 100%;
-  background: black;
-  background-image: url("https://static.vecteezy.com/system/resources/previews/002/008/069/large_2x/3d-starry-night-sky-background-free-photo.jpg");
+  background-color: black;
+  background-image: url("https://images.unsplash.com/photo-1465788786008-f75a725b34e9");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: white;
   display: flex;
   flex-direction: column;
