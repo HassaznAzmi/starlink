@@ -40,7 +40,7 @@ const Clock = ({ deadline }) => {
       </div>
       <div className="countdownColumn">
         <span className="timeCountdown">{seconds}</span>
-        <span>Seconds</span>
+        <span className="timeDesc">Seconds</span>
       </div>
     </div>
   );

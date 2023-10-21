@@ -31,6 +31,7 @@ body {
 }
 
 .nav-elements {
+  z-index: 1;
 }
 
 .nav-elements ul {
@@ -81,10 +82,10 @@ body {
   .nav-elements {
     position: absolute;
     right: 0;
-    top: 60px;
+    top: 46px;
     background-color: black;
     width: 0px;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 46px);
     transition: all 0.3s ease-in;
     overflow: hidden;
   }

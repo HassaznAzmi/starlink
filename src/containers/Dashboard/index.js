@@ -31,7 +31,7 @@ const Dashboard = () => {
         <h2>Last Launch</h2>
         <p>{latestLaunch?.name}</p>
         <p>{new Date(latestLaunch?.date_utc)?.toLocaleDateString("en-US")}</p>
-        <img src={latestLaunch?.links?.patch?.small} />
+        <img src={latestLaunch?.links?.patch?.small} className="patchImage" />
         <p>
           <span
             style={{
@@ -50,7 +50,7 @@ const Dashboard = () => {
         <p>{nextLaunch?.name}</p>
         <Countdown deadline={nextLaunch?.date_utc} />
         <iframe
-          width="560"
+          width="100%"
           height="315"
           src={`https://www.youtube.com/embed/${nextLaunch?.links?.youtube_id}`}
           title="YouTube video player"

@@ -24,16 +24,16 @@ const Navbar = () => {
         <div className={`nav-elements  ${showNavbar && "active"}`}>
           <ul>
             <li>
-              <Link to="/">Dashboard</Link>
+              <Link to="/starlink">Starlink</Link>
+            </li>
+            <li>
+              <Link to="/launches">Launches</Link>
             </li>
             <li>
               <Link to="/history">History</Link>
             </li>
             <li>
               <Link to="/rockets">Rockets</Link>
-            </li>
-            <li>
-              <Link to="/starlink">Starlink</Link>
             </li>
           </ul>
         </div>

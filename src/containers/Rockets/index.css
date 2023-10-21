@@ -1,8 +1,10 @@
 .rocketsContainer {
   display: flex;
   align-self: center;
+  flex-wrap: wrap;
 }
 
 .rocketImg {
   object-fit: none;
+  min-width: 300px;
 }

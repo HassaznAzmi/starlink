@@ -15,3 +15,21 @@
   font-weight: bolder;
   cursor: pointer;
 }
+
+@media only screen and (max-width: 1000px) {
+  .dashboardContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    align-self: stretch;
+    align-items: stretch;
+  }
+
+  .cardContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .patchImage {
+    width: 200px;
+  }
+}

@@ -14,3 +14,15 @@
 .timeCountdown {
   font-size: 36px;
 }
+
+@media only screen and (max-width: 1000px) {
+  .countdownContainer {
+    min-width: 0px;
+  }
+  .timeCountdown {
+    font-size: 24px;
+  }
+  .timeDesc {
+    font-size: 12px;
+  }
+}
