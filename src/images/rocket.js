@@ -2,7 +2,7 @@ import React from "react";
 
 const Rocket = () => (
   <svg
-    fill="#000000"
+    fill="#fff"
     height="800px"
     width="800px"
     version="1.1"

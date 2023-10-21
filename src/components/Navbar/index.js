@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import spacexLogo from "images/spacex.png";
@@ -12,6 +12,14 @@ const Navbar = () => {
     setShowNavbar(!showNavbar);
   };
 
+  const closeNavbar = () => setShowNavbar(false);
+
+  useEffect(() => {
+    if (document) {
+      document.body.style.overflow = showNavbar ? "hidden" : "auto";
+    }
+  }, [useEffect]);
+
   return (
     <nav className="navbar">
       <div className="navContainer">
@@ -24,16 +32,24 @@ const Navbar = () => {
         <div className={`nav-elements  ${showNavbar && "active"}`}>
           <ul>
             <li>
-              <Link to="/starlink">Starlink</Link>
+              <Link to="/starlink" onClick={closeNavbar}>
+                Starlink
+              </Link>
             </li>
             <li>
-              <Link to="/launches">Launches</Link>
+              <Link to="/launches" onClick={closeNavbar}>
+                Launches
+              </Link>
             </li>
             <li>
-              <Link to="/history">History</Link>
+              <Link to="/history" onClick={closeNavbar}>
+                History
+              </Link>
             </li>
             <li>
-              <Link to="/rockets">Rockets</Link>
+              <Link to="/rockets" onClick={closeNavbar}>
+                Rockets
+              </Link>
             </li>
           </ul>
         </div>
